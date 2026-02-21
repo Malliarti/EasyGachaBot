@@ -14,13 +14,13 @@ def home():
 def health():
     return "OK", 200
 
-def run_bot():
-    asyncio.run(bot.main())
-
-if __name__ == "__main__":
-    # Запускаем бота в отдельном потоке
-    t = Thread(target=run_bot)
-    t.start()
-    # Запускаем Flask-сервер на порту, который даст Render
+def run_flask():
     port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port)
+
+if __name__ == "__main__":
+    # Запускаем Flask в отдельном потоке
+    t = Thread(target=run_flask)
+    t.start()
+    # Запускаем бота в главном потоке
+    asyncio.run(bot.main())
