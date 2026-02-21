@@ -15,7 +15,10 @@ async def main():
     dp.include_router(service_selection.router)
     dp.include_router(order_input.router)
 
+    await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
+
+    print("Бот успешно запущен и начинает polling...")
 
 if __name__ == "__main__":
     asyncio.run(main())
